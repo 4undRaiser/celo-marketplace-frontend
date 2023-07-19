@@ -29,7 +29,7 @@ This web aplication uses the following tech stack:
 - Metamask or CeloExtension wallet
 
 ## Usage & installation
-- Clone the repository using command ```git clone https://git```
+- Clone the repository using command ```git clone https://github.com/4undRaiser/celo-marketplace-frontend.git```
 - Move into react folder ```cd celo-marketplace-frontend/packages/react-app/ ```
 - Run ```yarn install``` or ```npm install``` to install all required dependencies
 - Start the server using command ```yarn run dev``` or ```npm run dev```

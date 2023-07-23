@@ -21,7 +21,7 @@ const AddProductModal = () => {
   const [visible, setVisible] = useState(false);
   // The following states are used to store the values of the input fields
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState<string | number>(0);
+  const [productPrice, setProductPrice] = useState<number>(0);
   const [productImage, setProductImage] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productLocation, setProductLocation] = useState("");
@@ -68,10 +68,10 @@ const AddProductModal = () => {
 
   // Define function that handles the creation of a product through the marketplace contract
   const handleCreateProduct = async () => {
-    if (!createProduct) {
-      throw "Failed to create product";
-    }
     setLoading("Creating...");
+    if (!createProduct) {
+    throw new Error("Failed to create product"); 
+    }
     if (!isComplete) throw new Error("Please fill all fields");
     // Create the product by calling the writeProduct function on the marketplace contract
     const purchaseTx = await createProduct();
@@ -110,14 +110,17 @@ const AddProductModal = () => {
     token: erc20Instance.address as `0x${string}`,
   });
 
-  // If the user is connected and has a balance, display the balance
+
+  // Determine if the user's cUSD balance should be displayed
+  const shouldDisplayBalance = isConnected && cusdBalance;
+
+  // Set the displayBalance state with a single call to useState
+  const [displayBalance, setDisplayBalance] = useState(shouldDisplayBalance);
+
+  // Update the displayBalance state whenever the shouldDisplayBalance value changes
   useEffect(() => {
-    if (isConnected && cusdBalance) {
-      setDisplayBalance(true);
-      return;
-    }
-    setDisplayBalance(false);
-  }, [cusdBalance, isConnected]);
+    setDisplayBalance(shouldDisplayBalance);
+  }, [shouldDisplayBalance]);
 
   // Define the JSX that will be rendered
   return (

@@ -3,7 +3,7 @@
 
 # CELO FRONTEND MARKETPLACE
 
-live demo 
+[live demo](https://marketplace-frontend-iota.vercel.app)
 
 ## Description
 A marketplace that is built on the celo blockchain that allows users to perform the following tasks.
